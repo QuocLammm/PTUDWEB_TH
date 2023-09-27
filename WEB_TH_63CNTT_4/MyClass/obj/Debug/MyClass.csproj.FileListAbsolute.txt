@@ -1,0 +1,12 @@
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\bin\Debug\MyClass.dll.config
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\bin\Debug\MyClass.dll
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\bin\Debug\MyClass.pdb
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.dll
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.xml
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.AssemblyReference.cache
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.dll
+E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.pdb
