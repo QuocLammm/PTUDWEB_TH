@@ -17,5 +17,10 @@ namespace WEB_TH_63CNTT_4
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        public void Session_Start()
+        {
+            Session["UserId"] = "1"; 
+        }
     }
 }
