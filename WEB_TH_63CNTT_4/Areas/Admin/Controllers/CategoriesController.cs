@@ -117,5 +117,42 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
             categoriesDAO.Delete(categories);
             return RedirectToAction("Index");
         }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        //// GET: Admin/Category/Staus/5:Thay doi trang thai cua mau tin
+        //public ActionResult Status(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return RedirectToAction("Index", "Categories");
+        //    }
+        //    return RedirectToAction("Index", "Categorí");
+        //}
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        // GET: Admin/Category/DelTrash/5:Thay doi trang thai cua mau tin = 0
+        //public ActionResult DelTrash(int? id)
+        //{
+        //    //khi nhap nut thay doi Status cho mot mau tin
+        //    Categories categories = categoriesDAO.getRow(id);
+
+        //    //thay doi trang thai Status tu 1,2 thanh 0
+        //    categories.Status = 0;
+
+        //    //cap nhat gia tri cho UpdateAt/By
+        //    categories.UpdateBy = Convert.ToInt32(Session["UserId"].ToString());
+        //    categories.UpdateAt = DateTime.Now;
+
+        //    //Goi ham Update trong CategoryDAO
+        //    categoriesDAO.Update(categories);
+
+        //    //Thong bao thanh cong
+        //    TempData["message"] = new XMessage("success", "Xóa mẩu tin thành công");
+
+        //    //khi cap nhat xong thi chuyen ve Index
+        //    return RedirectToAction("Index", "Category");
+        //}
+
     }
 }
