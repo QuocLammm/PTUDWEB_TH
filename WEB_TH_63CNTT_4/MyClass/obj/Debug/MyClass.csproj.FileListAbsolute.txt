@@ -10,3 +10,15 @@ E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.CoreComp
 E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.CopyComplete
 E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.dll
 E:\HK1_2024\PTUDWEB_TH\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.pdb
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\bin\Debug\MyClass.dll.config
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\bin\Debug\MyClass.dll
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\bin\Debug\MyClass.pdb
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.dll
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.xml
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.AssemblyReference.cache
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.dll
+D:\QL\PTUDWEB_TH-main\WEB_TH_63CNTT_4\MyClass\obj\Debug\MyClass.pdb

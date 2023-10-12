@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MyClass.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using MyClass.Model;
 
 namespace MyClass.DAO
 {
@@ -19,21 +20,21 @@ namespace MyClass.DAO
             return db.Categories.ToList();
         }
 
-        /////////////////////////////////////////////////////////////////////////////////////
-        //Hien thi danh sach theo trang thai
-        public List<Categories> getList(string status = "All")
+        //INDEX DỰA VÀO STATUSS = 1,2 con status = 0 == thùng rác
+
+        public List<Categories> getList(string status = "ALL")
         {
             List<Categories> list = null;
             switch (status)
             {
-                case "Index"://status == 1,2
+                case "Index":
                     {
                         list = db.Categories
-                        .Where(m => m.Status != 0)
+                        .Where(m=> m.Status !=0)
                         .ToList();
                         break;
                     }
-                case "Trash"://status == 0
+                case "Trash":
                     {
                         list = db.Categories
                         .Where(m => m.Status == 0)
@@ -42,15 +43,13 @@ namespace MyClass.DAO
                     }
                 default:
                     {
-                        list = db.Categories.ToList();
-                        break;
+                        return db.Categories.ToList();
                     }
             }
             return list;
         }
 
-        /////////////////////////////////////////////////////////////////////////////////////
-        //Hien thi danh sach 1 mau tin (ban ghi)
+        // Details
         public Categories getRow(int? id)
         {
             if (id == null)
@@ -63,30 +62,25 @@ namespace MyClass.DAO
             }
         }
 
-        /////////////////////////////////////////////////////////////////////////////////////
-        ///Them moi mot mau tin
+        //CREATE
         public int Insert(Categories row)
         {
             db.Categories.Add(row);
             return db.SaveChanges();
         }
 
-        /////////////////////////////////////////////////////////////////////////////////////
-        ///Cap nhat mot mau tin
+        //UPDATE
         public int Update(Categories row)
         {
             db.Entry(row).State = EntityState.Modified;
             return db.SaveChanges();
         }
 
-        /////////////////////////////////////////////////////////////////////////////////////
-        ///Xoa mot mau tin Xoa ra khoi CSDL
+        //DELETE
         public int Delete(Categories row)
         {
             db.Categories.Remove(row);
             return db.SaveChanges();
         }
-
-
     }
 }
