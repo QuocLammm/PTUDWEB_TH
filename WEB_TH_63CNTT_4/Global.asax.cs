@@ -18,9 +18,10 @@ namespace WEB_TH_63CNTT_4
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        public void Session_Start()
+        //Tao moi Session
+        protected void Session_Start()
         {
-            Session["UserId"] = "1"; 
+            Session["UserID"] = "1";
         }
     }
 }

@@ -26,7 +26,7 @@ namespace WEB_TH_63CNTT_4.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-L9OS09M\\SQLEXPRESS04;Initial Catalog=master;Integrated Securi" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-L9OS09M\\SQLEXPRESS04;Initial Catalog=63CNTT;Integrated Securi" +
             "ty=True")]
         public string StrConnect {
             get {

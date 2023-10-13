@@ -57,13 +57,14 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 //---Create At
                 categories.CreateAt = DateTime.Now;
                 //---Create By
-                categories.CreateBy = Convert.ToInt32(Session["UserId"]);
+                categories.CreateBy = Convert.ToInt32(Session["UserID"]);
                 categoriesDAO.Insert(categories);
                 return RedirectToAction("Index");
             }
 
             return View(categories);
         }
+
 
         //// GET: Admin/Category/Edit/5
         public ActionResult Edit(int? id)

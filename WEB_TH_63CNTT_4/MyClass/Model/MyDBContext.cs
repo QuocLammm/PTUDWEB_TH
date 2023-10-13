@@ -11,9 +11,8 @@ namespace MyClass.Model
     public class MyDBContext: DbContext
     {
         // Tạo kết nối
-        public MyDBContext(): base("name = StrConnect")
-        { 
-        }
+        public MyDBContext(): base("name = StrConnect"){}
+
         // kết nối các bảng
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Contacts> Contacts { get; set; }
