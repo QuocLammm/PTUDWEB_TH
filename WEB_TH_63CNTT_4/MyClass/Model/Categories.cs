@@ -56,4 +56,5 @@ namespace MyClass.Model
         public int Status { get; set; }
 
     }
+
 }

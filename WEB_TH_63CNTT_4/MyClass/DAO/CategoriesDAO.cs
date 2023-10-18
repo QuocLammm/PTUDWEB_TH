@@ -82,5 +82,8 @@ namespace MyClass.DAO
             db.Categories.Remove(row);
             return db.SaveChanges();
         }
+
+        //TRASH
+
     }
 }
