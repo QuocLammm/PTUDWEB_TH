@@ -80,6 +80,18 @@ namespace MyClass.DAO
             db.Suppliers.Remove(row);
             return db.SaveChanges();
         }
+        //
+        //public Suppliers getCol(string id)
+        //{
+        //    if (id.ToString() == null)
+        //    {
+        //        return null;
+        //    }
+        //    else
+        //    {
+        //        return db.Suppliers.Find(id.ToString());
+        //    }
+        //}
 
     }
 }

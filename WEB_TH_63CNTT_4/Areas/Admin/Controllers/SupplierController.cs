@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Web.Mvc;
 using MyClass.DAO;
@@ -173,6 +174,13 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                         //upload hinh
                         string PathDir = "~/Public/img/supplier/";
                         string PathFile = Path.Combine(Server.MapPath(PathDir), imgName);
+
+                        //xóa file
+                        if (suppliers.Image != null)
+                        {
+                            string DelPath = Path.Combine(Server.MapPath(PathDir), suppliers.Image);
+                            System.IO.File.Delete(PathFile);
+                        }
                         img.SaveAs(PathFile);
                     }
                 }//ket thuc phan upload hinh anh
@@ -214,8 +222,16 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
             Suppliers suppliers = suppliersDAO.getRow(id);
             //Tìm thấy mẫu tin tiến hành xóa
             suppliersDAO.Delete(suppliers);
+
+            // Xóa hình ảnh liên quan
+            string imagePath = Path.Combine(Server.MapPath("~/Public/img/supplier"), suppliers.Image);
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }//kết thúc xóa ảnh 
+
             //Hiển thị thông báo
-            TempData["message"] = new XMessage("danger", "Xóa thông tin nhà cung cấp thành công!");
+            TempData["message"] = new XMessage("success", "Xóa thông tin nhà cung cấp thành công!");
             return RedirectToAction("Trash");// ở lại thùng rác
         }
 
@@ -321,5 +337,6 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
             //Tro ve trang Index
             return RedirectToAction("Trash");// ở lại thùng rác tiếp tục phục hồi or xóa
         }
+
     }
 }
