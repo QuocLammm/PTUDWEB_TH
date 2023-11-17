@@ -12,9 +12,7 @@ namespace WEB_TH_63CNTT_4.Controllers
         // GET: Site
         public ActionResult Index()
         {
-            //MyDBContext db = new MyDBContext();//tao moi DB
-            //int sodong = db.Products.Count();
-            //ViewBag.sodong = sodong;
+            
             return View();
         }
     }

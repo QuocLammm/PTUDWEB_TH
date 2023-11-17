@@ -33,13 +33,13 @@
                         <div class="row">
                             @*Phần nhập dữ liệu bằng tay*@
                             <div class="col-md-9">
-                                @*<div class="form-group">
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.CatID, htmlAttributes: new { @class = "control-label col-md-12" })
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.CatID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.DropDownListFor(model => model.CatID, (SelectList)ViewBag.ListCatID, "Chọn sản phầm", new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.CatID, "", new { @class = "text-danger" })
                                     </div>
-                                </div>*@
+                                </div>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12" })
@@ -66,13 +66,13 @@
                                     </div>
                                 </div>
 
-                                @*<div class="form-group">
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-12" })
                                     <div class="col-md-10">
                                         @Html.TextAreaFor(model => model.Slug, new { @class = "form-control", @row = "5" })
                                         @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
                                     </div>
-                                </div>*@
+                                </div>
 
                                 <div class="form-group">
                                     <label>Ảnh sản phẩm <span class="text-danger"></span></label>
@@ -108,26 +108,19 @@
                             </div>
 
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Supplier, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-10">
-                                    @Html.TextAreaFor(model => model.Supplier, new { @class = "form-control", @row = "1" })
-                                    @Html.ValidationMessageFor(model => model.Supplier, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SupplierID, htmlAttributes: new { @class = "control-label col-md-12" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.SupplierID, (SelectList)ViewBag.ListSupplier, "Danh sách nhà cung cấp", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-10">
-                                    @Html.TextAreaFor(model => model.Detail, new { @class = "form-control", @row = "1" })
-                                    @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
+        
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-12" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Text = "Không xuất bản", Value = "2" }, new SelectListItem { Text = "Xuất bản", Value = "1" } }, new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Text = "Hàng tồn", Value = "2" }, new SelectListItem { Text = "Hàng mới", Value = "1" } }, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                                 </div>
                             </div>

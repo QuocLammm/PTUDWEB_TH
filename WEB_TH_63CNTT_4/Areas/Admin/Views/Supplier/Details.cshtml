@@ -1,7 +1,7 @@
 ﻿@model MyClass.Model.Suppliers
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Thông tin chi tiết nhà cung cấp";
     Layout = "~/Areas/Admin/Views/Shared/_Layoutadmin.cshtml";
 }
 
@@ -39,6 +39,7 @@
                                 <th>@Html.DisplayNameFor(model => model.CreateAt)</th>
                                 <th>@Html.DisplayNameFor(model => model.UpdateAt)</th>
                                 <th>@Html.DisplayNameFor(model => model.Image)</th>
+                                <th>@Html.DisplayNameFor(model => model.Status)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,6 +54,16 @@
                                 <td>@Html.DisplayFor(model => model.CreateAt)</td>
                                 <td>@Html.DisplayFor(model => model.UpdateAt)</td>
                                 <td><img src="~/Public/img/supplier/@Model.Image" alt="Img" style="max-width : 100px" /></td>
+                                <td>
+                                    @if (Model.Status == 1)
+                                    {
+                                        <a href="@Url.Action("Status","Supplier", new { id = Model.Id })" class="btn-sm btn-success"><i class="fa fa-toggle-on"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Status","Supplier", new { id = Model.Id })" class="btn-sm btn-danger"><i class="fa fa-toggle-off"></i></a>
+                                    }
+                                </td>
                             </tr>
                         </tbody>
 

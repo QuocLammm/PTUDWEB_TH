@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort>44373</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -2696,6 +2696,11 @@
     <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

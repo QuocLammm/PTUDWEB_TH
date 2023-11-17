@@ -16,6 +16,8 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         ProductsDAO productsDAO = new ProductsDAO();
+        CategoriesDAO categoriesDAO = new CategoriesDAO();
+        SuppliersDAO suppliersDAO = new SuppliersDAO();
 
         // GET: Admin/Product
         public ActionResult Index()
@@ -45,7 +47,8 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public ActionResult Create()
         {
-            //ViewBag.productlist = new SelectList(productsDAO.getList("Index"),"Id","Name");
+            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");// lấy từ category
+            ViewBag.ListSupplier = new SelectList(suppliersDAO.getList("Index"), "Id", "Name");// lấy từ supplier
             return View();
         }
 
@@ -58,7 +61,6 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // xử lý tự động
                 //Xử lý tự động cho các trường sau:
                 //---Create At
                 products.CreateAt = DateTime.Now;
@@ -66,9 +68,6 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 products.CreateBy = Convert.ToInt32(Session["UserID"]);
                 // Slug
                 products.Slug = XString.Str_Slug(products.Name);
-                //
-      
-                
                 //Update at
                 products.UpdateAt = DateTime.Now;
                 //Update by
@@ -92,12 +91,15 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                         img.SaveAs(PathFile);
                     }
                 }//ket thuc phan upload hinh anh
+
                 productsDAO.Insert(products);// Thêm mới
+
                 //Hien thi thong bao
-                TempData["message"] = new XMessage("success", "Thêm mới nhà cung cấp thành công!");
+                TempData["message"] = new XMessage("success", "Thêm mới sản phẩm thành công!");
                 return RedirectToAction("Index");
             }
-
+            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");// lấy từ category
+            ViewBag.ListSupplier = new SelectList(suppliersDAO.getList("Index"), "Id", "Name");// l
             return View(products);
         }
 
@@ -118,6 +120,8 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 TempData["message"] = new XMessage("danger", "Cập nhật thông tin nhà cung cấp thất bại");
                 return RedirectToAction("Index");
             }
+            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");// lấy từ category
+            ViewBag.ListSupplier = new SelectList(suppliersDAO.getList("Index"), "Id", "Name");// l
             return View(products);
         }
 
@@ -134,15 +138,6 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 // Slug
                 products.Slug = XString.Str_Slug(products.Name);
 
-                ////Order
-                //if (products.Order == null)
-                //{
-                //    suppliers.Order = 1;
-                //}
-                //else
-                //{
-                //    suppliers.Order++;
-                //}
 
                 // Update at
                 products.UpdateAt = DateTime.Now;
@@ -175,11 +170,11 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                     }
                 }//ket thuc phan upload hinh anh
 
+                //cập nhật mẫu tin
                 productsDAO.Update(products);
-                TempData["message"] = new XMessage("success", "Cập nhật thông tin nhà cung cấp thành công!");
+                TempData["message"] = new XMessage("success", "Cập nhật thông tin sản phẩm thành công!");
                 return RedirectToAction("Index");
             }
-            //ViewBag.productlist = new SelectList(productsDAO.getList("Index"), "Id", "Name");
             return View(products);
         }
 
@@ -208,10 +203,11 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Products products = productsDAO.getRow(id);
-        //Tìm thấy mẫu tin tiến hành xóa
+
+            //Tìm thấy mẫu tin tiến hành xóa
             productsDAO.Delete(products);
 
-        // Xóa hình ảnh liên quan
+            // Xóa hình ảnh liên quan
             string imagePath = Path.Combine(Server.MapPath("~/Public/img/product"), products.Image);
             if (System.IO.File.Exists(imagePath))
             {
