@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<MyClass.Model.Products>
 @{
-    ViewBag.Title = "Trash";
+    ViewBag.Title = "Thùng rác sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layoutadmin.cshtml";
 }
 
@@ -38,10 +38,9 @@
                                 <th>@Html.DisplayNameFor(model => model.Slug)</th>
                              
                                 <th>@Html.DisplayNameFor(model => model.Price)</th>
-                                <th>@Html.DisplayNameFor(model => model.SalePrice)</th>
+                                
                                 <th>@Html.DisplayNameFor(model => model.Amount)</th>
-                                <th>@Html.DisplayNameFor(model => model.MetaDesc)</th>
-                                <th>@Html.DisplayNameFor(model => model.MetaKey)</th>
+                               
                                 <th>@Html.DisplayNameFor(model => model.Image)</th>
                                 <th>Chức năng</th>
                             </tr>
@@ -57,10 +56,9 @@
                                     <td>@Html.DisplayFor(modelItem => item.Slug)</td>
                                 
                                     <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.SalePrice)</td>
+                                  
                                     <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.MetaDesc)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.MetaKey)</td>
+                                    
                                     <td><img src="~/Public/img/product/@item.Image" alt="Img" style="max-width : 100px" /></td>
                                     <td>
                                         <a href="@Url.Action("Undo","Product", new { id = item.Id })" class="btn-sm btn-success"><i class="fa fa-undo"></i></a>

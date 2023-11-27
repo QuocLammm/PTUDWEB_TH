@@ -175,6 +175,8 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 TempData["message"] = new XMessage("success", "Cập nhật thông tin sản phẩm thành công!");
                 return RedirectToAction("Index");
             }
+            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");// lấy từ category
+            ViewBag.ListSupplier = new SelectList(suppliersDAO.getList("Index"), "Id", "Name");// l
             return View(products);
         }
 

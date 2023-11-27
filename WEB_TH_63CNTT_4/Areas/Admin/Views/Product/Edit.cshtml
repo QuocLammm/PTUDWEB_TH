@@ -1,7 +1,7 @@
 ﻿@model MyClass.Model.Products
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Chỉnh sửa thông tin sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layoutadmin.cshtml";
 }
  s
@@ -25,7 +25,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <strong class="text-danger">TẠO MỚI LOẠI HÀNG</strong>
+                                <strong class="text-danger">CHỈNH SỬA THÔNG TIN SẢN PHẨM</strong>
                             </div>
                             <div class="col-md-6 text-right">
                                 <a href=" @Url.Action("Index", "Product")" class="btn-sm btn-info"><i class="fa fa-long-arrow-alt-left"> Quay lại </i></a>
@@ -116,7 +116,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-12" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Text = "Không xuất bản", Value = "2" }, new SelectListItem { Text = "Xuất bản", Value = "1" } }, new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Text = "Không xuất bản", Value = "Xuất bản" }, new SelectListItem { Text = "Xuất bản", Value = "1" } }, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                                 </div>
                             </div>

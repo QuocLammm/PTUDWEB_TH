@@ -15,7 +15,7 @@ namespace MyClass.Model
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Mã loại sản phẩm")]
+        [Display(Name = "Loại sản phẩm")]
         public int CatID { get; set; }
 
         [Display(Name = "Tên sản phẩm")]
@@ -33,15 +33,15 @@ namespace MyClass.Model
         public string Image { get; set; }
 
         [Required(ErrorMessage = "Giá sản phẩm không được để trống")]
-        [Display(Name = "Giá sản phẩm")]
+        [Display(Name = "Giá nhập")]
         public decimal Price { get; set; }
 
-        [Display(Name = "Giá khuyến mãi")]
+        [Display(Name = "Giá bán")]
         public decimal SalePrice { get; set; }
 
         [Display(Name = "Số lượng")]
         [Required(ErrorMessage = "SỐ lượng không được để trống")]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         [Required(ErrorMessage = "Mô tả không được để trống")]
         [Display(Name = "Mô tả")]

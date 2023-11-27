@@ -41,7 +41,8 @@
                                 <th>@Html.DisplayNameFor(model => model.SupplierID)</th>
                                 <th>@Html.DisplayNameFor(model => model.Image)</th>
                                 <th>@Html.DisplayNameFor(model => model.Price)</th>
-                                <th>@Html.DisplayNameFor(model => model.SalePrice)</th>
+                                @*<th>@Html.DisplayNameFor(model => model.SalePri*@@*ce)</th>*@
+
                                 <th>@Html.DisplayNameFor(model => model.Amount)</th>
                                 <th>Chức năng</th>
                             </tr>
@@ -57,7 +58,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.SupplierID)</td>
                                     <td><img src="~/Public/img/product/@item.Image" alt="Img" style="max-width : 100px" /></td>
                                     <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.SalePrice)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.SalePrice)</td>*@
                                     <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                                     <td>
                                         @if (item.Status == 1)

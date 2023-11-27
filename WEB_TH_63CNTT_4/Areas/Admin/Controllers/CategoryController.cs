@@ -16,6 +16,7 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
     {
 
         CategoriesDAO categoriesDAO = new CategoriesDAO();
+        LinksDAO linksDAO = new LinksDAO();
         // GET: Admin/Category
         public ActionResult Index()
         {
@@ -85,11 +86,21 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 //Update by
                 categories.UpdateBy = Convert.ToInt32(Session["UserID"]);
 
+                
+
                 // hien thi thong bao thanh cong
                 TempData["message"] = new XMessage("success","Tạo mới loại sản phẩm thành công!");
 
 
-                categoriesDAO.Insert(categories);
+                //xu ly cho muc Topics
+                if (categoriesDAO.Insert(categories) == 1)//khi them du lieu thanh cong
+                {
+                    Links links = new Links();
+                    links.Slug = categories.Slug;
+                    links.TableId = categories.Id;
+                    links.Type = "category";
+                    linksDAO.Insert(links);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.CatList = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");
@@ -145,12 +156,22 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                     categories.Order++;
                 }
 
+                
+
                 //Update at
                 categories.UpdateAt = DateTime.Now;
                 //Update by
                 categories.UpdateBy = Convert.ToInt32(Session["UserID"]);
-                //Cap nhat database
-                categoriesDAO.Update(categories);
+
+                //Neu trung khop thong tin: Type = category va TableID = categories.ID
+                Links links = linksDAO.getRow(categories.Id, "category");
+                if (categoriesDAO.Update(categories) == 1)
+                {
+                    //Cap nhat du lieu
+                    links.Slug = categories.Slug;
+                    linksDAO.Update(links);
+                }
+
                 //Hien thi thong bao
                 TempData["message"] = new XMessage("success", "Cập nhật thông tin thành công");
                 return RedirectToAction("Index");
@@ -185,8 +206,14 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Categories categories = categoriesDAO.getRow(id);
-            //Tìm thấy mẫu tin tiến hành xóa
-            categoriesDAO.Delete(categories);
+            //tim thay mau tin thi xoa, cap nhat cho Links
+            if (categoriesDAO.Delete(categories) == 1)
+            {
+                Links links = linksDAO.getRow(categories.Id, "category");
+                //Xoa luon cho Links
+                linksDAO.Delete(links);
+            }
+
             //Hiển thị thông báo
             TempData["message"] = new XMessage("danger", "Xóa mẫu tin thành công!");
             return RedirectToAction("Trash");// ở lại thùng rác
