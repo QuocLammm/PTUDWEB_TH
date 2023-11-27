@@ -17,7 +17,7 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
 {
     public class TopicController : Controller
     {
-        TopictsDAO topicdao = new TopictsDAO();
+        TopicsDAO topicdao = new TopicsDAO();
         LinksDAO linksDAO = new LinksDAO();
 
         // GET: Admin/Supplier

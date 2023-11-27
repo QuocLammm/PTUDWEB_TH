@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyClass.DAO
 {
-    public class TopictsDAO
+    public class TopicsDAO
     {
         private MyDBContext db = new MyDBContext();
         /////////////////////////////////////////////////////////////////////////////////////
