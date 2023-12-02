@@ -129,19 +129,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PageController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SliderController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\KhachhangController.cs" />
+    <Compile Include="Controllers\LienheController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Controllers\TimKiemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Library\CartItem.cs" />
+    <Compile Include="Library\XCart.cs" />
     <Compile Include="Library\XMessage.cs" />
     <Compile Include="Library\XString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -225,6 +231,7 @@
     <Content Include="Public\dist\js\pages\dashboard.js" />
     <Content Include="Public\dist\js\pages\dashboard2.js" />
     <Content Include="Public\dist\js\pages\dashboard3.js" />
+    <Content Include="Public\img\bando.png" />
     <Content Include="Public\img\blog\add.jpg" />
     <Content Include="Public\img\blog\author.png" />
     <Content Include="Public\img\blog\blog1.png" />
@@ -2701,33 +2708,36 @@
     <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Trash.cshtml" />
-    <Content Include="Areas\Admin\Views\Contacts\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Contacts\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Contacts\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Contacts\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Topic\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Topic\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Topic\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Topic\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Topic\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Topic\Trash.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Trash.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -2752,13 +2762,35 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_LayoutSite.cshtml" />
-    <Content Include="Views\Site\Index.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\Module\MainMenu.cshtml" />
+    <Content Include="Views\Module\Slider.cshtml" />
+    <Content Include="Views\Module\CategoriesList.cshtml" />
+    <Content Include="Views\Module\MenuFooter.cshtml" />
+    <Content Include="Views\Module\MainMenuSub_0.cshtml" />
+    <Content Include="Views\Module\MainMenuSub_1.cshtml" />
+    <Content Include="Views\Module\SupList.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\ThanhToan.cshtml" />
+    <Content Include="Views\Khachhang\DangNhap.cshtml" />
+    <Content Include="Views\Khachhang\DangKy.cshtml" />
+    <Content Include="Views\TimKiem\Index.cshtml" />
+    <Content Include="Views\Site\Index.cshtml" />
+    <Content Include="Views\Site\Home.cshtml" />
+    <Content Include="Views\Site\Product.cshtml" />
+    <Content Include="Views\Site\ProductCategory.cshtml" />
+    <Content Include="Views\Site\PostPage.cshtml" />
+    <Content Include="Views\Site\PostTopic.cshtml" />
+    <Content Include="Views\Site\Error404.cshtml" />
+    <Content Include="Views\Site\SupPage.cshtml" />
+    <Content Include="Views\Site\ProductDetail.cshtml" />
+    <Content Include="Views\Site\HomeProduct.cshtml" />
+    <Content Include="Views\Lienhe\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Login\" />
     <Folder Include="Models\" />
     <Folder Include="Public\img\supplier\" />
   </ItemGroup>

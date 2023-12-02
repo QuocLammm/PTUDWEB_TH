@@ -13,6 +13,68 @@ namespace WEB_TH_63CNTT_4
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //Khai bao cho URL co dinh: tat-ca-san-pham
+            routes.MapRoute(
+               name: "Tatcasanpham",
+               url: "tat-ca-san-pham",
+               defaults: new { controller = "Site", action = "Product", id = UrlParameter.Optional }
+           );
+
+            //Khai bao cho URL co dinh: tat-ca-bai-viet
+            routes.MapRoute(
+               name: "Tatcabaiviet",
+               url: "tat-ca-bai-viet",
+               defaults: new { controller = "Site", action = "Post", id = UrlParameter.Optional }
+           );
+
+            //Khai bao cho URL co dinh: lien-he
+            routes.MapRoute(
+               name: "Lienhe",
+               url: "lien-he",
+               defaults: new { controller = "Lienhe", action = "Index", id = UrlParameter.Optional }
+           );
+
+            //Khai bao cho URL co dinh: gio-hang
+            routes.MapRoute(
+               name: "Giohang",
+               url: "cart",
+               defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional }
+           );
+
+            //Khai bao cho URL co dinh: thanh-toan
+            routes.MapRoute(
+               name: "Thanhtoan",
+               url: "thanh-toan",
+               defaults: new { controller = "Cart", action = "ThanhToan", id = UrlParameter.Optional }
+           );
+
+            //Khai bao cho URL co dinh: dăng-nhap
+            routes.MapRoute(
+               name: "DangNhap",
+               url: "dang-nhap",
+               defaults: new { controller = "Khachhang", action = "DangNhap", id = UrlParameter.Optional }
+           );
+            //Khai bao cho URL co dinh: dăng-ky
+            routes.MapRoute(
+               name: "DangKy",
+               url: "dang-ky",
+               defaults: new { controller = "Khachhang", action = "DangKy", id = UrlParameter.Optional }
+           );
+            //Khai bao cho URL co dinh: tim-kiem
+            routes.MapRoute(
+               name: "Timkiem",
+               url: "tim-kiem",
+               defaults: new { controller = "TimKiem", action = "Index", id = UrlParameter.Optional }
+           );
+
+            //khai bao cho URL dong
+            routes.MapRoute(
+              name: "Siteslug",
+              url: "{slug}",
+              defaults: new { controller = "Site", action = "Index", id = UrlParameter.Optional }
+          );
+
+            //gia tri mac dinh
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

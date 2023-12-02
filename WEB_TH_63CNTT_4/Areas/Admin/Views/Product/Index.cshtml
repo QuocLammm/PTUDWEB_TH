@@ -1,14 +1,13 @@
-﻿@model IEnumerable<MyClass.Model.Products>
+﻿﻿@model IEnumerable<MyClass.Model.Products>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layoutadmin.cshtml";
+    ViewBag.Title = "Trang chủ sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var suppliers = ViewBag.Suppliers as IEnumerable<MyClass.Model.Suppliers>;
 }
-
 @section header{
     <link href="~/Public/css/jquery.dataTables.min.css" rel="stylesheet" />
 }
-
 <div class="wrapper">
     <!-- Main Sidebar Container -->
     <!-- Content Wrapper. Contains page content -->
@@ -30,19 +29,17 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @*//Hieen thi dong thong bao*@
+                    @*hien thi dong thong bao*@
                     @Html.Partial("Message")
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.Id)</th>
-                                <th>@Html.DisplayNameFor(model => model.CatID)</th>
                                 <th>@Html.DisplayNameFor(model => model.Name)</th>
+                                <th>@Html.DisplayNameFor(model => model.CatID)</th>
                                 <th>@Html.DisplayNameFor(model => model.SupplierID)</th>
-                                <th>@Html.DisplayNameFor(model => model.Image)</th>
+                                <th class="col-md-1">@Html.DisplayNameFor(model => model.Image)</th>
                                 <th>@Html.DisplayNameFor(model => model.Price)</th>
-                                @*<th>@Html.DisplayNameFor(model => model.SalePri*@@*ce)</th>*@
-
                                 <th>@Html.DisplayNameFor(model => model.Amount)</th>
                                 <th>Chức năng</th>
                             </tr>
@@ -53,13 +50,23 @@
 
                                 <tr>
                                     <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CatID)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.SupplierID)</td>
-                                    <td><img src="~/Public/img/product/@item.Image" alt="Img" style="max-width : 100px" /></td>
+                                    <td>@Html.DisplayFor(modelItem => item.CatID)</td>
+
+                                    <td>
+                                        @if (suppliers != null)
+                                        {
+                                            var supplier = suppliers.FirstOrDefault(s => s.Id == item.SupplierID);
+                                            if (supplier != null)
+                                            {
+                                                @supplier.Name
+                                            }
+                                        }
+                                    </td>
+                                    <td><img src="~/Public/img/product/@item.Image" alt="Img" class="img-fluid" /></td>
                                     <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    @*<td>@Html.DisplayFor(modelItem => item.SalePrice)</td>*@
                                     <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+
                                     <td>
                                         @if (item.Status == 1)
                                         {

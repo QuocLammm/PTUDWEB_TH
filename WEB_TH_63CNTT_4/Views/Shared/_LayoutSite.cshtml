@@ -1,18 +1,21 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html>
 <head>
+    <title>@Page.Title</title>
+    <title>@ViewBag.Title</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aroma Shop - Home</title>
-    <link rel="icon" href="img/Fevicon.png" type="image/png">
+    <link rel="icon" href="~/Public/img/Fevicon.png" type="image/png">
     <link rel="stylesheet" href="Public/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="Public/vendors/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="Public/vendors/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="Public/vendors/nice-select/nice-select.css">
     <link rel="stylesheet" href="Public/vendors/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="Public/vendors/owl-carousel/owl.carousel.min.css">
-
+    <link rel="stylesheet" href="Public/css/style.css">
     <script src="Public/vendors/jquery/jquery-3.2.1.min.js"></script>
     <script src="Public/vendors/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="Public/vendors/skrollr.min.js"></script>
@@ -21,19 +24,17 @@
     <script src="Public/vendors/jquery.ajaxchimp.min.js"></script>
     <script src="Public/vendors/mail-script.js"></script>
     <script src="Public/js/main.js"></script>
-
-    <link rel="stylesheet" href="Public/css/style.css">
-    <title>@Page.Title</title>
     @RenderSection("header", required: false)
 </head>
 <body>
     <!--================ Start Header Menu Area =================-->
     <header class="header_area">
         <div class="main_menu">
-           @Html.Action("MainMenu","Module")
+            @Html.Action("MainMenu", "Module")
         </div>
     </header>
     <!--================ End Header Menu Area =================-->
+
     @RenderBody()
 
     <!--================ Start footer Area  =================-->
@@ -55,15 +56,7 @@
                     </div>
                     <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
                         <div class="single-footer-widget tp_widgets">
-                            <h4 class="footer_title">Quick Links</h4>
-                            <ul class="list">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Shop</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Product</a></li>
-                                <li><a href="#">Brand</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
+                            @Html.Action("MenuFooter", "Module")
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6 col-sm-6">
@@ -87,15 +80,15 @@
                                     <span class="fa fa-location-arrow"></span>
                                     Head Office
                                 </p>
-                                <p>123, Main Street, Your City</p>
+                                <p>Cửu lợi 1 - Cam Hòa - Cam Lâm - Khánh Hòa</p>
 
                                 <p class="sm-head">
                                     <span class="fa fa-phone"></span>
                                     Phone Number
                                 </p>
                                 <p>
-                                    +123 456 7890 <br>
-                                    +123 456 7890
+                                    
+                                    +84 815597300
                                 </p>
 
                                 <p class="sm-head">
@@ -103,8 +96,8 @@
                                     Email
                                 </p>
                                 <p>
-                                    free@infoexample.com <br>
-                                    www.infoexample.com
+                                    quoclam010305@gmail.com <br>
+                                    www.facebook.com/an.tiue.3
                                 </p>
                             </div>
                         </div>
@@ -119,7 +112,7 @@
                     <p class="col-lg-12 footer-text text-center">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://github.com/QuocLammm" target="_blank">Quốc Lâm</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -128,6 +121,6 @@
     </footer>
     @RenderSection("footer", required: false)
     <!--================ End footer Area  =================-->
-
 </body>
+
 </html>

@@ -2,56 +2,34 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Web.Mvc;
 using MyClass.DAO;
 using MyClass.Model;
 using WEB_TH_63CNTT_4.Library;
-using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
 {
     public class TopicController : Controller
     {
-        TopicsDAO topicdao = new TopicsDAO();
+        TopicsDAO topicsDAO = new TopicsDAO();
         LinksDAO linksDAO = new LinksDAO();
 
-        // GET: Admin/Supplier
+        /////////////////////////////////////////////////////////////////////////////////////
+        // Admin/Topic/Index: Tra ve danh sach cac mau tin
         public ActionResult Index()
         {
-            return View(topicdao.getList("Index"));
+            return View(topicsDAO.getList("Index"));//hien thi toan bo danh sach loai SP
         }
 
-        // GET: Admin/Supplier/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Không tìm thấy nhà cung cấp");
-                return RedirectToAction("Index");
-            }
-            Topics topic = topicdao.getRow(id);
-            if (topicdao == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Không tìm thấy nhà cung cấp");
-                return RedirectToAction("Index");
-            }
-            return View(topic);
-        }
-
-        /// //////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////
         // GET: Admin/Topic/Create: Them moi mot mau tin
         public ActionResult Create()
         {
-            ViewBag.ListTopic = new SelectList(topicdao.getList("Index"), "Id", "Name");
-            ViewBag.OrderTopic = new SelectList(topicdao.getList("Index"), "Order", "Name");
+            ViewBag.ListTopic = new SelectList(topicsDAO.getList("Index"), "Id", "Name");
+            ViewBag.OrderTopic = new SelectList(topicsDAO.getList("Index"), "Order", "Name");
             return View();
         }
 
@@ -86,14 +64,10 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 topics.CreateAt = DateTime.Now;
 
                 //Xu ly cho muc CreateBy
-                topics.CreateBy = Convert.ToInt32(Session["UserID"]);
-                //Update at
-                topics.UpdateAt = DateTime.Now;
-                //Update by
-                topics.UpdateBy = Convert.ToInt32(Session["UserID"]);
+                topics.CreateBy = Convert.ToInt32(Session["UserId"]);
 
                 //xu ly cho muc Topics
-                if (topicdao.Insert(topics) == 1)//khi them du lieu thanh cong
+                if (topicsDAO.Insert(topics) == 1)//khi them du lieu thanh cong
                 {
                     Links links = new Links();
                     links.Slug = topics.Slug;
@@ -104,36 +78,92 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 //Thong bao thanh cong
                 TempData["message"] = new XMessage("success", "Thêm chủ đề thành công");
                 return RedirectToAction("Index");
-
             }
-            ViewBag.ListTopic = new SelectList(topicdao.getList("Index"), "Id", "Name");
-            ViewBag.OrderTopic = new SelectList(topicdao.getList("Index"), "Order", "Name");
+            ViewBag.ListTopic = new SelectList(topicsDAO.getList("Index"), "Id", "Name");
+            ViewBag.OrderTopic = new SelectList(topicsDAO.getList("Index"), "Order", "Name");
             return View(topics);
         }
 
-
-        // GET: Admin/Supplier/Edit/5
-        public ActionResult Edit(int? id)
+        /////////////////////////////////////////////////////////////////////////////////////
+        // GET: Admin/Topic/Staus/5:Thay doi trang thai cua mau tin
+        public ActionResult Status(int? id)
         {
-            ViewBag.ListTopic = new SelectList(topicdao.getList("Index"), "Id", "Name");
-            ViewBag.OrderTopic = new SelectList(topicdao.getList("Index"), "Order", "Name");
             if (id == null)
             {
-                //hiện thị thông báo
-                TempData["message"] = new XMessage("danger", "Không tìm thấy nhà cung cấp!");
-                return RedirectToAction("Index");
+                //Thong bao that bai
+                TempData["message"] = new XMessage("danger", "Cập nhật chủ đề thất bại");
+                //chuyen huong trang
+                return RedirectToAction("Index", "Topic");
             }
-            Topics topic = topicdao.getRow(id);
-            if (topic == null)
+
+            //khi nhap nut thay doi Status cho mot mau tin
+            Topics topics = topicsDAO.getRow(id);
+
+            //kiem tra id cua topics co ton tai?
+            if (topics == null)
             {
-                //hiện thị thông báo
-                TempData["message"] = new XMessage("danger", "Không tìm thấy nhà cung cấp!");
-                return RedirectToAction("Index"); ;
+                //Thong bao that bai
+                TempData["message"] = new XMessage("danger", "Cập nhật trạng thái thất bại");
+
+                //chuyen huong trang
+                return RedirectToAction("Index", "Topic");
             }
-            return View(topic);
+            //thay doi trang thai Status tu 1 thanh 2 va nguoc lai
+            topics.Status = (topics.Status == 1) ? 2 : 1;
+
+            //cap nhat gia tri cho UpdateAt/By
+            topics.UpdateBy = Convert.ToInt32(Session["UserId"].ToString());
+            topics.UpdateAt = DateTime.Now;
+
+            //Goi ham Update trong TopicDAO
+            topicsDAO.Update(topics);
+
+            //Thong bao thanh cong
+            TempData["message"] = new XMessage("success", "Cập nhật trạng thái thành công");
+
+            //khi cap nhat xong thi chuyen ve Index
+            return RedirectToAction("Index", "Topic");
         }
 
-        // POST: Admin/Supplier/Edit/5
+        /////////////////////////////////////////////////////////////////////////////////////
+        // Admin/Topic/Detail: Hien thi mot mau tin
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Topics topics = topicsDAO.getRow(id);
+            if (topics == null)
+            {
+                return HttpNotFound();
+            }
+            return View(topics);
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        // GET: Admin/Topic/Edit/5: Cap nhat mau tin
+        public ActionResult Edit(int? id)
+        {
+            ViewBag.ListTopic = new SelectList(topicsDAO.getList("Index"), "Id", "Name");
+            ViewBag.OrderTopic = new SelectList(topicsDAO.getList("Index"), "Order", "Name");
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Topics topics = topicsDAO.getRow(id);
+
+            if (topics == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(topics);
+        }
+
+        // POST: Admin/Topic/Edit/5: Cap nhat mau tin
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Topics topics)
@@ -144,6 +174,12 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 topics.Slug = XString.Str_Slug(topics.Name);
                 //chuyen doi dua vao truong Name de loai bo dau, khoang cach = dau -
 
+                //Xu ly cho muc ParentId
+                if (topics.ParentId == null)
+                {
+                    topics.ParentId = 0;
+                }
+
                 //Xu ly cho muc Order
                 if (topics.Order == null)
                 {
@@ -153,19 +189,18 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 {
                     topics.Order = topics.Order + 1;
                 }
-                //Xu ly cho muc CreateAt
-                topics.CreateAt = DateTime.Now;
 
-                //Xu ly cho muc CreateBy
-                topics.CreateBy = Convert.ToInt32(Session["UserID"]);
-                //Update at
+                //Xy ly cho muc UpdateAt
                 topics.UpdateAt = DateTime.Now;
-                //Update by
-                topics.UpdateBy = Convert.ToInt32(Session["UserID"]);
 
+                //Xy ly cho muc UpdateBy
+                topics.UpdateBy = Convert.ToInt32(Session["UserId"]);
+
+                //Thong bao thanh cong
+                TempData["message"] = new XMessage("success", "Sửa danh mục thành công");
 
                 //Cap nhat du lieu, sua them cho phan Links phuc vu cho Topics
-                if (topicdao.Update(topics) == 1)
+                if (topicsDAO.Update(topics) == 1)
                 {
                     //Neu trung khop thong tin: Type = category va TableID = categories.ID
                     Links links = linksDAO.getRow(topics.Id, "topic");
@@ -173,153 +208,118 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                     links.Slug = topics.Slug;
                     linksDAO.Update(links);
                 }
-;
 
-                //Thong bao thanh cong
-                TempData["message"] = new XMessage("success", "Sửa danh mục thành công");
                 return RedirectToAction("Index");
             }
             return View(topics);
         }
 
-        // GET: Admin/Supplier/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Xóa thông tin nhà cung cấp thất bại");
-                return RedirectToAction("Trash");
-            }
-            Topics topic = topicdao.getRow(id);
-            if (topic == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Xóa thông tin nhà cung cấp thất bại");
-                return RedirectToAction("Trash");
-            }
-            return View(topic);
-        }
-
-        // POST: Admin/Supplier/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Topics topic = topicdao.getRow(id);
-
-            //Tìm thấy mẫu tin tiến hành xóa
-            topicdao.Delete(topic);
-
-            
-
-            //Hiển thị thông báo
-            TempData["message"] = new XMessage("success", "Xóa thông tin nhà cung cấp thành công!");
-            return RedirectToAction("Trash");// ở lại thùng rác
-        }
-
-        //Status
-        //// GET: Admin/Category/Edit/5
-        public ActionResult Status(int? id)
-        {
-            if (id == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Cập nhật trạng thái thất bại");
-                return RedirectToAction("Index");
-            }
-            Topics topic = topicdao.getRow(id);
-            if (topic == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Cập nhật trạng thái thất bại");
-                return RedirectToAction("Index");
-
-            }
-            //Cap nhat trang thai
-            topic.Status = (topic.Status == 1) ? 2 : 1;
-            //Cap nhat Update At
-            topic.UpdateAt = DateTime.Now;
-            //Cap nhat Update By
-            topic.UpdateBy = Convert.ToInt32(Session["UserID"]);
-
-            topicdao.Update(topic);//Xac nhan Update database
-            //Hien thi thong bao
-            TempData["message"] = new XMessage("success", "Cập nhật trạng thái thành công!");
-            //Tro ve trang Index
-            return RedirectToAction("Index");
-        }
-        ///////////////////////
-        /////// GET: Admin/Category/DelTrash/5
+        /////////////////////////////////////////////////////////////////////////////////////
+        // GET: Admin/Topic/DelTrash/5:Thay doi trang thai cua mau tin = 0
         public ActionResult DelTrash(int? id)
         {
-            if (id == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Xóa mẫu tin thất bại");
-                return RedirectToAction("Index");
-            }
-            Topics topic = topicdao.getRow(id);
-            if (topic == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Xóa mẫu tin thất bại");
-                return RedirectToAction("Index");
+            //khi nhap nut thay doi Status cho mot mau tin
+            Topics topics = topicsDAO.getRow(id);
 
-            }
-            //Cap nhat trang thai
-            topic.Status = 0;
-            //Cap nhat Update At
-            topic.UpdateAt = DateTime.Now;
-            //Cap nhat Update By
-            topic.UpdateBy = Convert.ToInt32(Session["UserID"]);
-            //Xac nhan Update database
-            topicdao.Update(topic);
-            //Hien thi thong bao
-            TempData["message"] = new XMessage("success", "Xóa mẫu tin thành công!");
-            //Tro ve trang Index
-            return RedirectToAction("Index");
+            //thay doi trang thai Status tu 1,2 thanh 0
+            topics.Status = 0;
+
+            //cap nhat gia tri cho UpdateAt/By
+            topics.UpdateBy = Convert.ToInt32(Session["UserId"].ToString());
+            topics.UpdateAt = DateTime.Now;
+
+            //Goi ham Update trong TopicDAO
+            topicsDAO.Update(topics);
+
+            //Thong bao thanh cong
+            TempData["message"] = new XMessage("success", "Xóa mẩu tin thành công");
+
+            //khi cap nhat xong thi chuyen ve Index
+            return RedirectToAction("Index", "Topic");
         }
 
-        //
-        // GET: Admin/Category/Trash= luc thung rac
-        public ActionResult Trash()
+        /////////////////////////////////////////////////////////////////////////////////////
+        // GET: Admin/Topic/Trash/5:Hien thi cac mau tin có gia tri la 0
+        public ActionResult Trash(int? id)
         {
-            return View(topicdao.getList("Trash"));
+            return View(topicsDAO.getList("Trash"));
         }
 
-        ///////
-        /////Status
-        //// GET: Admin/Category/Edit/5
+        /////////////////////////////////////////////////////////////////////////////////////
+        // GET: Admin/Topic/Recover/5:Chuyen trang thai Status = 0 thanh =2
         public ActionResult Undo(int? id)
         {
             if (id == null)
             {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Phục hồi thông tin thất bại");
-                return RedirectToAction("Index");
+                //Thong bao that bai
+                TempData["message"] = new XMessage("danger", "Cập nhật trạng thái thất bại");
+                //chuyen huong trang
+                return RedirectToAction("Index", "Topic");
             }
-            Topics topic = topicdao.getRow(id);
-            if (topic == null)
-            {
-                //Hien thi thong bao
-                TempData["message"] = new XMessage("danger", "Phục hồi thông tin thất bại");
-                return RedirectToAction("Index");
 
+            //khi nhap nut thay doi Status cho mot mau tin
+            Topics topics = topicsDAO.getRow(id);
+            //kiem tra id cua categories co ton tai?
+            if (topics == null)
+            {
+                //Thong bao that bai
+                TempData["message"] = new XMessage("danger", "Phục hồi dữ liệu thất bại");
+
+                //chuyen huong trang
+                return RedirectToAction("Index", "Topic");
             }
-            //Cap nhat trang thai status = 2
-            topic.Status = 2;
-            //Cap nhat Update At
-            topic.UpdateAt = DateTime.Now;
-            //Cap nhat Update By
-            topic.UpdateBy = Convert.ToInt32(Session["UserID"]);
-            //Xac nhan Update database
-            topicdao.Update(topic);
-            //Hien thi thong bao
-            TempData["message"] = new XMessage("success", "Phục hồi thông tin thành công thành công!");
-            //Tro ve trang Index
-            return RedirectToAction("Trash");// ở lại thùng rác tiếp tục phục hồi or xóa
+            //thay doi trang thai Status tu 1 thanh 2 va nguoc lai
+            topics.Status = 2;
+
+            //cap nhat gia tri cho UpdateAt/By
+            topics.UpdateBy = Convert.ToInt32(Session["UserId"].ToString());
+            topics.UpdateAt = DateTime.Now;
+
+            //Goi ham Update trong TopicDAO
+            topicsDAO.Update(topics);
+
+            //Thong bao thanh cong
+            TempData["message"] = new XMessage("success", "Phục hồi dữ liệu thành công");
+
+            //khi cap nhat xong thi chuyen ve Trash
+            return RedirectToAction("Trash", "Topic");
         }
 
+        /////////////////////////////////////////////////////////////////////////////////////
+        // GET: Admin/Topic/Delete/5:Xoa mot mau tin ra khoi CSDL
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Topics topics = topicsDAO.getRow(id);
+            if (topics == null)
+            {
+                return HttpNotFound();
+            }
+            return View(topics);
+        }
+
+        // POST: Admin/Category/Delete/5:Xoa mot mau tin ra khoi CSDL
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Topics topics = topicsDAO.getRow(id);
+
+            //tim thay mau tin thi xoa, cap nhat cho Links
+            if (topicsDAO.Delete(topics) == 1)
+            {
+                Links links = linksDAO.getRow(topics.Id, "topic");
+                //Xoa luon cho Links
+                linksDAO.Delete(links);
+            }
+
+            //Thong bao thanh cong
+            TempData["message"] = new XMessage("success", "Xóa chủ đề thành công");
+            //O lai trang thung rac
+            return RedirectToAction("Trash");
+        }
     }
 }

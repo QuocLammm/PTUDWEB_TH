@@ -17,7 +17,7 @@ namespace MyClass.Model
         public int UserID { get; set; }
 
         [Required]
-        public string ReceiverAddress { get; set; }
+        public string ReceiverAddress { get; set; } 
         [Required]
         public string ReceiverPhone { get; set; }
         [Required]

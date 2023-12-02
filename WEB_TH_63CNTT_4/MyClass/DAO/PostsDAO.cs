@@ -13,7 +13,7 @@ namespace MyClass.DAO
         private MyDBContext db = new MyDBContext();
         /////////////////////////////////////////////////////////////////////////////////////
         //Hien thi danh sach toan bo Loai san pham: SELCT * FROM
-        public List<Posts> getList(string status = "All")
+        public List<Posts> getList(string status = "All", string type = "Post")
         {
             List<Posts> list = null;
             switch (status)
@@ -21,25 +21,28 @@ namespace MyClass.DAO
                 case "Index":
                     {
                         list = db.Posts
-                        .Where(m => m.Status != 0)
+                        .Where(m => m.Status != 0 && m.PostType == type)
                         .ToList();
                         break;
                     }
                 case "Trash":
                     {
                         list = db.Posts
-                        .Where(m => m.Status == 0)
+                        .Where(m => m.Status == 0 && m.PostType == type)
                         .ToList();
                         break;
                     }
                 default:
                     {
-                        list = db.Posts.ToList();
+                        list = db.Posts
+                            .Where(m => m.PostType == type)
+                            .ToList();
                         break;
                     }
             }
             return list;
         }
+
         /////////////////////////////////////////////////////////////////////////////////////
         //Hien thi danh sach 1 mau tin (ban ghi)
         public Posts getRow(int? id)
@@ -52,6 +55,15 @@ namespace MyClass.DAO
             {
                 return db.Posts.Find(id);
             }
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        //Hien thi danh sach 1 mau tin (ban ghi)
+        public Posts getRow(string slug)
+        {
+            return db.Posts
+                .Where(m => m.Slug == slug && m.Status == 1)
+                .FirstOrDefault();
         }
 
         /////////////////////////////////////////////////////////////////////////////////////

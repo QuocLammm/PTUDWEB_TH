@@ -1,9 +1,9 @@
-﻿@model IEnumerable<MyClass.Model.Topics>
+﻿﻿@model IEnumerable<MyClass.Model.Topics>
+
 @{
-    ViewBag.Title = "Tất cả chủ đề";
+    ViewBag.Title = "Tất cả chủ đề bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 @section header {
     <link href="~/Public/css/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css" rel="stylesheet" />
 }
@@ -12,10 +12,13 @@
     <script src="~/Public/js/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js"></script>
     <script>let table = new DataTable('#myTable');</script>
 }
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+
     <!-- Main content -->
     <section class="content my-2">
+
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
@@ -27,6 +30,7 @@
                         <a href="@Url.Action("Create","Topic")" class="btn-sm btn-success"> <i class="fa fa-plus"></i>Thêm</a>
                         <a href="@Url.Action("Trash","Topic")" class="btn-sm btn-danger"> <i class="fa fa-trash"></i>Thùng rác</a>
                     </div>
+
                 </div>
             </div>
             <div class="card-body">

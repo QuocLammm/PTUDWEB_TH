@@ -33,5 +33,16 @@ namespace WEB_TH_63CNTT_4.Properties {
                 return ((string)(this["StrConnect"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-L9OS09M\\SQLEXPRESS04;Initial Catalog=63CNTT;Integrated Securi" +
+            "ty=True")]
+        public string OnlineShopDbContext {
+            get {
+                return ((string)(this["OnlineShopDbContext"]));
+            }
+        }
     }
 }

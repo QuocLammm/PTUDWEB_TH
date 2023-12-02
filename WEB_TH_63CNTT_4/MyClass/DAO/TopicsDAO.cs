@@ -53,7 +53,12 @@ namespace MyClass.DAO
                 return db.Topics.Find(id);
             }
         }
-
+        public Topics getRow(string slug)
+        {
+            return db.Topics
+                .Where(m => m.Slug == slug && m.Status == 1)
+                .FirstOrDefault();
+        }
         /////////////////////////////////////////////////////////////////////////////////////
         ///Them moi mot mau tin
         public int Insert(Topics row)
@@ -77,6 +82,5 @@ namespace MyClass.DAO
             db.Topics.Remove(row);
             return db.SaveChanges();
         }
-
     }
 }

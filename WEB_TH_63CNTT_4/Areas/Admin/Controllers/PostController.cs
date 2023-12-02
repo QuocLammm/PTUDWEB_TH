@@ -94,7 +94,7 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 posts.CreateAt = DateTime.Now;
 
                 //Xu ly cho muc CreateBy
-                posts.CreateBy = Convert.ToInt32(Session["UserId"]);
+                posts.CreateBy = Convert.ToInt32(Session["UserID"]);
 
                 //xu ly cho muc Topics
                 if (postsDAO.Insert(posts) == 1)//khi them du lieu thanh cong
@@ -177,7 +177,7 @@ namespace WEB_TH_63CNTT_4.Areas.Admin.Controllers
                 posts.UpdateAt = DateTime.Now;
 
                 //Xu ly cho muc UpdateBy
-                posts.UpdateBy = Convert.ToInt32(Session["UserId"]);
+                posts.UpdateBy = Convert.ToInt32(Session["UserID"]);
 
                 //xu ly cho muc Links
                 if (postsDAO.Update(posts) == 1)//khi sua du lieu thanh cong

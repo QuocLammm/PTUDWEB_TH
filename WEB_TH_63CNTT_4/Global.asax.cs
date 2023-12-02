@@ -22,6 +22,8 @@ namespace WEB_TH_63CNTT_4
         protected void Session_Start()
         {
             Session["UserID"] = "1";
+            Session["MyCart"] = "";//khoi tao gia tri = NULL
+            Session["UserCustomer"] = "";
         }
     }
 }

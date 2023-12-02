@@ -1,9 +1,10 @@
-﻿@model MyClass.Model.Topics
+﻿﻿@model MyClass.Model.Topics
 
 @{
     ViewBag.Title = "Thêm mới chủ đề bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -70,7 +71,7 @@
                             <div class="form-group">
                                 <label>Sắp xếp <span class="text-danger"></span></label>
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Order, (SelectList)@ViewBag.OrderTopic, "Sắp xếp", new {@class= "form-control" })
+                                    @Html.DropDownListFor(model => model.Order, (SelectList)@ViewBag.OrderTopic, "Sắp xếp", new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -82,6 +83,7 @@
                                     @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="form-group">
