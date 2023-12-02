@@ -2702,11 +2702,6 @@
     <Content Include="Areas\Admin\Views\Product\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Contact\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Contact\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Contact\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Trash.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Delete.cshtml" />
